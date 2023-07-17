@@ -1,4 +1,6 @@
+import jwt from 'jsonwebtoken'
 import { db } from './dbConnect.js'
+import { secret } from '../creds.js'
 
 const coll = db.collection('users')
 
@@ -14,8 +16,8 @@ export async function login(req, res) {
   const { email, password } = req.body
   let user = await coll.findOne({ email: email.toLowerCase(), password })
   delete user.password // strip out password
-  // TODO: create token and send with user below
-  res.send({ user })
+  const token = jwt.sign(user, secret)
+  res.send({ user, token })
 }
 
 // TODO: getProfile
