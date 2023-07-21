@@ -1,0 +1,3 @@
+export const mongoURI = "mongodb+srv://toddalbert:aNyXo6bynF5mn8D2@serverlessinstance0.bmdjkyv.mongodb.net/?retryWrites=true&w=majority"
+export const secret = "djfhdsajfhew8rtu0q3534q5p435o43v5/4543]ewr3q4;5353;45k43543/5;45345"
+export const salt = "$2b$10$tPoAUVUajuxZS4dhu57pYO"
