@@ -24,11 +24,10 @@ export async function login(req, res) {
     return
   }
   delete user.password // strip out password
-  const token = jwt.sign(user, secret)
+  const token = jwt.sign(user, secret) // ENCODE
   res.send({ user, token })
 }
 
-// TODO: getProfile
 export async function getProfile(req, res) {
   const user = await coll.findOne({_id: new ObjectId(req.decodedToken_id)})
   res.send({ user })
