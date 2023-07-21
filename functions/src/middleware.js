@@ -23,7 +23,7 @@ export async function matchingUser(req, res, next) {
     return
   }
   next()
-}
+} 
 
 //JUST AN EXAMPLE:
 const adminUsers = [
