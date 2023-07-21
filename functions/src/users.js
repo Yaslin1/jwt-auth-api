@@ -21,7 +21,7 @@ export async function login(req, res) {
     return
   }
   delete user.password // strip out password
-  const token = jwt.sign(user, secret)
+  const token = jwt.sign(user, secret) // ENCODE
   res.send({ user, token })
 }
 
@@ -32,7 +32,7 @@ export async function getProfile(req, res) {
     res.status(401).send({ message: "Not authorized" })
     return
   }
-  const decoded = jwt.verify(req.headers.authorization, secret)
+  const decoded = jwt.verify(req.headers.authorization, secret) // DECODE
   const user = await coll.findOne({ _id: new ObjectId(decoded._id) })
   res.send({ user })
 }

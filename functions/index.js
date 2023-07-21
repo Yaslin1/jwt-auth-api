@@ -8,8 +8,8 @@ app.use(cors()) // allows access from other domains
 app.use(express.json()) // patch and post in json
 
 // routes:
-app.post("/signup", signup)
-app.post("/login", login)
+app.post("/signup", signup) // POST /users
+app.post("/login", login) // GET /users?email=blah@plop.com&password=secretStuff
 
 // protected: (authenticated users only)
 app.get("/profile", getProfile)
