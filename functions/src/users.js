@@ -30,15 +30,23 @@ export async function login(req, res) {
 
 // TODO: getProfile
 export async function getProfile(req, res) {
-  // make sure the user has sent an auth token (JWT)
-  if(!req.headers || !req.headers.authorization) {
-    res.status(401).send({ message: "Not authorized" })
-    return
-  }
-  const decoded = jwt.verify(req.headers.authorization, secret)
-  const user = await coll.findOne({ _id: new ObjectId(decoded._id) })
+  const user = await coll.findOne({_id: new ObjectId(req.decodedToken_id)})
   res.send({ user })
 }
 
 // TODO: editProfile
+export async function updateProfile(req, res) {
+  await coll.updateOne(
+    { _id: new ObjectId(req.params.uid)}, //object to update
+    { $set: req.body }) // new stuff to put in doc
+    res.status(202).send({message: "User profile updated", success: true })
+}
 
+
+  //Middle ware is going to check it for us. 
+  //make sure the user has sent an auth token (JWT)
+  // if(!req.headers || !req.headers.authorization) {
+  //   res.status(401).send({ message: "Not authorized" })
+  //   return
+  // }
+  // const decoded = jwt.verify(req.headers.authorization, secret) //DECODE
